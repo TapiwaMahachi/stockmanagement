@@ -7,7 +7,7 @@ users can access and manage stock based on  filtering either to see all the inve
 or to see which ones are running low in stock based on a threshhold or view based on category.
 
 ### url
-Demo of the [stockmanagement app](https://enigmatic-headland-24414.herokuapp.com/)
+Demo of the [stockmanagement app](https://pure-basin-41999.herokuapp.com/)
 
 
 To start using the application you need to login as admin

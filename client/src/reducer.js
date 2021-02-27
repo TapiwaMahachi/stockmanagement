@@ -7,8 +7,9 @@ export const initialState = {
 //set to the login user
 function reducer(state, action){
 
-          if(action.type === "USER")
-            return { ...state, user: action.user}
+    if(action.type === "USER")
+        return { ...state, user: action.user}
+
     return state
 }
 export default reducer;

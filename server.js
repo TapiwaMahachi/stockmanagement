@@ -12,14 +12,19 @@ import { prodRoute } from "./routes/productRoute.js";
 
 //config the env
 dotenv.config(); 
+
 //app config
 const app = express();
-const port = process.env.PORT || 9000; //port were the app is runnig
+
+const port = process.env.PORT || 9000;
 
 //middleware
-app.use(express.json())
-app.use(cookieParser());
 
+//parse body as json
+app.use(express.json());
+
+//parse the jwt token cookies as object
+app.use(cookieParser());
 
 //setting headers
 app.use(cors());
@@ -31,7 +36,7 @@ mongoose.connect(process.env.DB_CONNECT,{
     useUnifiedTopology: true
 });
 
-//Router middleware  for our api routes
+//Router middleware
 app.use('/users', authRoute);
 
 app.use('/products', prodRoute);
@@ -42,7 +47,7 @@ if(process.env.NODE_ENV === 'production'){
     app.use(express.static('client/build'));
 
     app.get('*', (req,res)=>{
-        res.sendFile(path.resolve(__dirname,'client', 'build', 'index.html'));
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
     })
 }
 //listen

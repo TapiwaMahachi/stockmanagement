@@ -1,4 +1,3 @@
-
 import express from 'express';
 import User from '../models/user.js';
 import {userRegistrationValidation, loginValidation}  from '../validation.js'
@@ -8,10 +7,10 @@ import verifyUser from './verifyToken.js';
 
 const router = express.Router();
 
-//router to register users
+//register users
 router.post('/register',verifyUser, async (req, res)=>{
      
-    //validating the user checking and getting the error
+    //validating the user input details
     const {error} = userRegistrationValidation(req.body);
      if(error) 
         return res.status(400).send(error.details[0].message);
@@ -27,7 +26,7 @@ router.post('/register',verifyUser, async (req, res)=>{
      //getting user from the body and replacing the password with the new hashed password
     const user = {...req.body, password: hashPassword};
 
-    //creating a user using mongoose create
+    //creating a user
      User.create(user, (err, user)=>{
          if(err){
              res.status(400).send(err)
@@ -43,7 +42,7 @@ router.post('/register',verifyUser, async (req, res)=>{
 //login
 router.post('/login',  async (req, res)=>{
 
-    //validate the user details entered
+    //validate the user details 
     const {error} = loginValidation(req.body);
     if(error) 
         return res.status(400).send(error.details[0].message);
@@ -67,13 +66,12 @@ router.post('/login',  async (req, res)=>{
     res.cookie('jwt',token, {httpOnly: true})
      
     //sending a few user details excluding password
-    res.send({name: user.name, id: user._id, admin: user.admin})
-
-    //redirecting  to the admin
+    res.send({name: user.name, id: user._id, admin: user.admin});
 
 })
 //get all users
 router.get('/all',verifyUser, (req, res)=>{
+
     const admin =req.user.admin;
     if(!admin){
         res.status(403).send('Access Denied')
@@ -90,7 +88,9 @@ router.get('/all',verifyUser, (req, res)=>{
 
 //get user
 router.get('/user/:id',verifyUser, (req, res)=>{
+
      const id = req.params.id;
+
      User.findById(id, (err, data)=>{
          if(err)
             res.status(500).send(err);
@@ -100,6 +100,7 @@ router.get('/user/:id',verifyUser, (req, res)=>{
 });
 
 router.put('/user/update/:id',verifyUser,async (req, res)=>{
+
     //verifying if the user is admin
     const {admin} = req.user;
     if(!admin)
@@ -108,7 +109,7 @@ router.put('/user/update/:id',verifyUser,async (req, res)=>{
     //id from the url
     const id = req.params.id;
    
-    //check if the password exists by getting the user if not hash the new password
+    //check if the password exists if not hash the new password
     const passwordExist = await User.findOne({password: req.body.password});
    
     if(!passwordExist){
@@ -125,6 +126,7 @@ router.put('/user/update/:id',verifyUser,async (req, res)=>{
 });
 
 router.delete('/user/delete/:id',verifyUser,(req, res)=>{
+
     //verifying if the user is admin
     const {admin} = req.user;
     if(!admin)
@@ -132,6 +134,7 @@ router.delete('/user/delete/:id',verifyUser,(req, res)=>{
     
     //id from the url
     const id = req.params.id;
+
     User.deleteOne({_id: id},(err, data)=>{
         if(err)
             res.status(500).send(err);

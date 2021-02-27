@@ -4,7 +4,7 @@ import verifyUser from './verifyToken.js';
 
 const router = express.Router();
 
-//route to get all products from the database all users
+//get all products
 router.get('/all', (req, res)=>{
     
     Product.find((err, data)=>{
@@ -15,7 +15,7 @@ router.get('/all', (req, res)=>{
     })
 
 })
-//route to get one product - only verified users
+//get product
 router.get('/product/:id',(req, res)=>{
     const id = req.params.id;
     Product.findById(id,(err, data)=>{
@@ -27,7 +27,7 @@ router.get('/product/:id',(req, res)=>{
     })
 })
 
-//route to add a new product in the database - only verified users
+//add product to db
 router.post('/add',verifyUser, (req, res) =>{
 
     //verifying if the user is admin
@@ -38,7 +38,7 @@ router.post('/add',verifyUser, (req, res) =>{
     //getting the product from the body
     const product = req.body;
 
-    //create the product in the database
+    //add  product to the database
     Product.create(product,(err, data)=>{
         if(err)
             res.status(500).send(err);
@@ -46,7 +46,8 @@ router.post('/add',verifyUser, (req, res) =>{
             res.status(201).send(data);
     });
 })
-//edit the product - needs fixing not working git user must be verified to update
+
+//updating product
 router.put('/product/update/:id',verifyUser,  (req, res)=>{
 
      //verifying if the user is admin
@@ -59,7 +60,7 @@ router.put('/product/update/:id',verifyUser,  (req, res)=>{
     //get product id from url
     const id = req.params.id
 
-    //find the product from the database and update it using spread syntax
+    //find the product using id
     Product.updateOne({_id: id}, {...product},(err , data)=>{
         if(err)
           res.status(500).send(err);
@@ -68,16 +69,17 @@ router.put('/product/update/:id',verifyUser,  (req, res)=>{
     });
 
 })
-//deleting the product user must be veryfied to delete
+//delete product
 router.delete('/product/delete/:id',verifyUser, (req, res)=>{
 
      //verifying if the user is admin
     const {admin} = req.user;
     if(!admin)
         return res.status(403).send('Not an admin');
+
     //get product id from url
     const id = req.params.id;
-    
+    //delete using id
     Product.deleteOne({_id: id}, (err,data)=>{
         if(err){
             res.status(500).send(err)

@@ -1,10 +1,11 @@
 import jwt from 'jsonwebtoken';
 
-//middleware function to verify the user used to allow access to  certain routes
+//middleware to veryfy users
 function verifyUser (req, res, next){
 
-    //getting token from the header - if doesnt exist deny access
-    //getting the token stored in the cookie objext
+    /**
+     * token stored in the cookie object
+     */
     const token = req.cookies.jwt;
  
     if(!token) 

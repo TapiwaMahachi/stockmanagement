@@ -1,6 +1,8 @@
 import mongoose from 'mongoose';
 
-//creating our product schema
+/**
+ * product schema
+ */
 const productSchema = mongoose.Schema({
           title: {
                type: String,
@@ -24,5 +26,7 @@ const productSchema = mongoose.Schema({
           },
 });
 
-//exporting  the model 
+/**
+ * creating the product from schema
+ */
 export default  mongoose.model('Product', productSchema);

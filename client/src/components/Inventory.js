@@ -8,7 +8,8 @@ const FILTER_MAP ={
     All: prod => prod.quantity >= 0,
     Low: prod => prod.quantity <= 10,
     Art: prod => prod.category === 'Art',
-
+    Vintage: prod=> prod.category === 'Vintage',
+    Classic: prod =>prod.category ==='Classic'
 }
 
 //array of filter names
