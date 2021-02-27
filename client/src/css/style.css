@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+*,*::after,*::before{
+    box-sizing: border-box;
+    margin: 0;
+}
+:root{
+
+    --ff:'Roboto', sans-serif;
+    --fw-bold: 700;
+    --fw-reg: 400;
+
+    --fs-reg: 1rem;
+    --fs-lrg: 2rem;
+    --fs-med: 1.2rem;
+
+    --clr-accent: #ffffff;
+    --clr-btn: #288ff7;
+    --clr-primary:#ef4e14;
+    --clr-border:rgb(211, 208, 208);
+    --clr-text: rgb(45, 51, 68);
+
+}
+
+body{
+  background: var(--clr-accent);
+  font-size: var(--fs-reg);
+  font-family: var(--ff);
+  font-weight: var(--fw-reg);
+  line-height: 1.2;
+
+}
+
+h1{
+    font-size: var(--fs-lrg);
+    font-weight: var(--fw-bold);
+}
+a{
+    text-decoration: none;
+    color: inherit;
+    background: inherit;
+}
+.hero{
+    background-image: url('../img/welcome_illustration..svg');
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-clip: border-box;
+    height: 100vh;
+    margin: 0 ;
+}

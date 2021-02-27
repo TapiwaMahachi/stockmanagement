@@ -1,0 +1,12 @@
+select{
+    height: 40px;
+    border: 1px solid var(--clr-border);
+    outline: 0;
+    border-radius: 5px;
+    margin-bottom: 1em;
+    font-size: var(--fs-body);
+    font-weight: var(--fw-reg);
+}
+select:focus{
+    border-color: var(--clr-btn);
+}
