@@ -102,39 +102,127 @@ users/user/update/:id                   PUT                         id=[string] 
 users/user/delete/:id                   DELETE                      id=[string] required delete user based on id
 
 ```
-## USERS
+## Show users
 
-Returns json data about a single user.
+Returns json data about all users.
 
-####URL
+#### URL
 
-/users/user/:id
+/users/all
 
-####Method:
+#### Method:
 
 GET
 
-####URL Params
-
-Required:
-
-id=[integer]
-
-####Data Params
+#### URL Params
 
 None
 
-Success Response:
+#### Data Params
 
-Code: 200
-Content: { id : 12, name : "Michael Bloom" }
-Error Response:
+User Details
 
-Code: 404 NOT FOUND
-Content: { error : "User doesn't exist" }
+## Login User
 
+Returns json data about a single user.
 
+#### URL
 
+/users/login
+
+#### Method:
+
+POST
+
+#### URL Params
+
+None
+
+#### Data Params
+
+User Details
+
+## User Update
+Returns json data about a single user.
+
+#### URL
+
+/users/user/update/:id
+
+#### Method:
+
+PUT
+
+#### URL Params
+
+Required:
+
+id=[string]
+
+#### Data Params
+
+User Details
+
+## User Delete
+Removes a single user from the database.
+
+#### URL
+
+/users/user/delete/:id
+
+#### Method:
+
+DELETE
+
+#### URL Params
+
+Required:
+
+id=[string]
+
+#### Data Params
+
+None
+
+## User Create
+Returns json data about a single user.
+
+#### URL
+
+/users/register
+
+#### Method:
+
+POST
+
+#### URL Params
+
+None
+
+#### Data Params
+
+User Details
+
+## Get User 
+Returns json data about a single user.
+
+#### URL
+
+/users/user/:id
+
+#### Method:
+
+GET
+
+#### URL Params
+
+Required:
+
+id=[string]
+
+#### Data Params
+
+User Details
 
 
 
