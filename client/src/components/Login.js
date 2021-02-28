@@ -1,6 +1,5 @@
 import React, {  useState } from 'react'
 import { useHistory } from 'react-router-dom';
-import welcome from '../img/welcome_illustration..svg';
 import {useStateValue} from '../StateProvider';
 import '../css/login.css';
 
@@ -51,19 +50,19 @@ const Login = () => {
 
             if(res.ok){
                 const data = await res.json();
-                    //setting our loged in user to the context
-                     dispatch({
-                        type: "USER",
-                        user: data,
-                     })
-                    //reset the form
-                    setUser({
-                        email: '',
-                        password: '',
-                        name:''
-                    });
-                    history.push('/admin');
-                } 
+                //setting our loged in user to the context
+                dispatch({
+                    type: "USER",
+                    user: data,
+                })
+                //reset the form
+                setUser({
+                    email: '',
+                    password: '',
+                    name:''
+                });
+                history.push('/admin');
+            } 
         }
         loginUser()
         .catch(e => setErr(true));  
@@ -72,7 +71,6 @@ const Login = () => {
    
     return (
         <section className="login-section">
-    {/* <img className="welcome" src={welcome} alt='' /> */}
         <div className="login">
             <form className={`login__container ${err && 'err'}`} onSubmit={handleSubmit}>
                     <h1>Get Started.....</h1>

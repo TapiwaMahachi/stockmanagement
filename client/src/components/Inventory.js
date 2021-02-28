@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react';
 import UpdateProduct from './UpdateProduct';
 import CreateProduct from './CreateProduct';
+import Pusher from 'pusher-js';
 
 
 //functions to use when filtering products based on quantity
@@ -45,8 +46,24 @@ function Products(props) {
         fetchData()
         .catch(console.log)
 
-    },[]);
-  
+    },[data]);
+
+    //updating our component in real time
+    useEffect(()=>{
+        const pusher = new Pusher('e6ecd84fa30f782c06ae', {
+             cluster: 'mt1'
+        });
+
+        const channel = pusher.subscribe('product');
+        channel.bind('inserted', function(prod) {
+         setData([...data, prod])
+        });
+        return () =>{
+            channel.unbind_all();
+            channel.unsubscribe();
+        }
+    },[data])
+
     return (
         <>
             <div className="admin__top">

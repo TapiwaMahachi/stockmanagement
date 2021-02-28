@@ -23,7 +23,7 @@ const port = process.env.PORT || 9000;
 //parse body as json
 app.use(express.json());
 
-//parse the jwt token cookies as object
+//parse cookies as object
 app.use(cookieParser());
 
 //setting headers
@@ -35,6 +35,30 @@ mongoose.connect(process.env.DB_CONNECT,{
     useNewUrlParser:true,
     useUnifiedTopology: true
 });
+//pusher for listening to db changes in realtime
+const pusher = new Pusher({
+  appId: "1159115",
+  key: "e6ecd84fa30f782c06ae",
+  secret: "c432670c15ef6ff5cdbe",
+  cluster: "mt1",
+  useTLS: true
+});
+const db = mongoose.connection;
+db.once('open', ()=>{
+    console.log('Db Connected');
+
+    const productCollection = db.collection('products');
+    const  changeStream = productCollection.watch();
+    changeStream.on('change', (change)=>{
+
+        if(change.operationType==="insert"){
+            const productDetail = change.fullDocument;
+            pusher.trigger('product', 'inserted',{
+                product: productDetail
+            })
+        }
+    })
+})
 
 //Router middleware
 app.use('/users', authRoute);
