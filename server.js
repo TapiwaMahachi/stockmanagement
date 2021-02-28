@@ -18,8 +18,6 @@ const app = express();
 
 const port = process.env.PORT || 9000;
 
-//middleware
-
 //parse body as json
 app.use(express.json());
 
@@ -45,8 +43,7 @@ const pusher = new Pusher({
 });
 const db = mongoose.connection;
 db.once('open', ()=>{
-    console.log('Db Connected');
-
+    
     const productCollection = db.collection('products');
     const  changeStream = productCollection.watch();
     changeStream.on('change', (change)=>{

@@ -73,33 +73,33 @@ const Login = () => {
         <section className="login-section">
         <div className="login">
             <form className={`login__container ${err && 'err'}`} onSubmit={handleSubmit}>
-                    <h1>Get Started.....</h1>
-                     <input 
-                        type="name" 
-                        value={user.name}
-                        name="name" 
-                        required  
-                        placeholder="User Name"
-                        onChange={handleChange}
-                     />
+                <h1>Get Started.....</h1>
                     <input 
-                        type="email" 
-                        value={user.email}
-                        name="email" 
-                        required  
-                        placeholder="Email adress"
-                        onChange={handleChange}
-                     />
-                    <input 
-                        type="password" 
-                        value={user.password}
-                        name="password" 
-                        required 
-                        placeholder="Password"
-                        onChange={handleChange}
+                    type="name" 
+                    value={user.name}
+                    name="name" 
+                    required  
+                    placeholder="User Name"
+                    onChange={handleChange}
                     />
-                    <span>Passwords need to be at least 6 characters long. </span>
-                    <button type="submit"  className="signin">Sign In</button>
+                <input 
+                    type="email" 
+                    value={user.email}
+                    name="email" 
+                    required  
+                    placeholder="Email adress"
+                    onChange={handleChange}
+                    />
+                <input 
+                    type="password" 
+                    value={user.password}
+                    name="password" 
+                    required 
+                    placeholder="Password"
+                    onChange={handleChange}
+                />
+                <span>Passwords need to be at least 6 characters long. </span>
+                <button type="submit"  className="signin">Sign In</button>
             </form> 
         </div>
        </section>

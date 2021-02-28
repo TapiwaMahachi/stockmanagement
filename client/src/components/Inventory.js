@@ -4,7 +4,7 @@ import CreateProduct from './CreateProduct';
 import Pusher from 'pusher-js';
 
 
-//functions to use when filtering products based on quantity
+//functions to use when filtering 
 const FILTER_MAP ={
     All: prod => prod.quantity >= 0,
     Low: prod => prod.quantity <= 10,
@@ -27,7 +27,7 @@ function Products(props) {
    //hook to filter products
     const [filter, setFilter] = useState('All');
 
-    //filter between all stock and low stock
+    //filtering based on category
     const handleFilter=e=>{
         e.preventDefault();
         setFilter(e.target.value);
@@ -40,29 +40,30 @@ function Products(props) {
             setData(prod)
         }   
     }
-    //fetch all data on mount
+    //fetch all data
     useEffect(()=>{
 
         fetchData()
         .catch(console.log)
 
     },[data]);
-
+   
+   
     //updating our component in real time
     useEffect(()=>{
         const pusher = new Pusher('e6ecd84fa30f782c06ae', {
              cluster: 'mt1'
         });
-
+      
         const channel = pusher.subscribe('product');
         channel.bind('inserted', function(prod) {
-         setData([...data, prod])
+         setData(data =>[...data, prod])
         });
-        return () =>{
-            channel.unbind_all();
-            channel.unsubscribe();
-        }
-    },[data])
+      return () =>{
+          channel.unbind_all();
+          channel.unsubscribe();
+      }
+    },[])
 
     return (
         <>
