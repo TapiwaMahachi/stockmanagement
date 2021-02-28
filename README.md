@@ -80,231 +80,231 @@ security to our passwords and login details for the Mongodb.
 Only admin and verified users have access. This adds a security layer to our API routes by using the JWT to verify users and store the token for 24hours only.
 Used bcrypt to make sure passwords are hashed.
 
-## Show users
+### Show users
 
 Returns json data about all users.
 
 #### URL
 
-/users/all
+- /users/all
 
 #### Method:
 
-GET
+- GET
 
 #### URL Params
 
-None
+- None
 
 #### Data Params
 
-User Details
+- User Details
 
-## Login User
+### Login User
 
 Returns json data about a single user.
 
 #### URL
 
-/users/login
+- /users/login
 
 #### Method:
 
-POST
+- POST
 
 #### URL Params
 
-None
+- None
 
 #### Data Params
 
-User Details
+- User Details
 
-## User Update
+### User Update
 Returns json data about a single user.
 
 #### URL
 
-/users/user/update/:id
+- /users/user/update/:id
 
 #### Method:
 
-PUT
+- PUT
 
 #### URL Params
 
 Required:
 
-id=[string]
+- id=[string]
 
 #### Data Params
 
-User Details
+- User Details
 
-## User Delete
+### User Delete
 Removes a single user from the database.
 
 #### URL
 
-/users/user/delete/:id
+- /users/user/delete/:id
 
 #### Method:
 
-DELETE
+- DELETE
 
 #### URL Params
 
 Required:
 
-id=[string]
+- id=[string]
 
 #### Data Params
 
-None
+- None
 
-## User Create
+### User Create
 Returns json data about a single user.
 
 #### URL
 
-/users/register
+- /users/register
 
 #### Method:
 
-POST
+- POST
 
 #### URL Params
 
-None
+- None
 
 #### Data Params
 
-User Details
+- User Details
 
-## Get User 
+### Get User 
 Returns json data about a single user.
 
 #### URL
 
-/users/user/:id
+- /users/user/:id
 
 #### Method:
 
-GET
+- GET
 
 #### URL Params
 
 Required:
 
-id=[string]
+- id=[string]
 
 #### Data Params
 
-User Detail
+- User Detail
 
 
-## Show Products
+### Show Products
 
 Returns json data about all products.
 
 #### URL
 
-/products/all
+- /products/all
 
 #### Method:
 
-GET
+- GET
 
 #### URL Params
 
-None
+- None
 
 #### Data Params
 
-Product details
+- Product details
 
 
-## Product Update
+### Product Update
 Returns json data about a single product.
 
 #### URL
 
-/products/product/update/:id
+- /products/product/update/:id
 
 #### Method:
 
-PUT
+- PUT
 
 #### URL Params
 
 Required:
 
-id=[string]
+- id=[string]
 
 #### Data Params
 
-Product details
+- Product details
 
-## Product Delete
+### Product Delete
 Removes a single product from the database.
 
 #### URL
 
-/products/product/delete/:id
+- /products/product/delete/:id
 
 #### Method:
 
-DELETE
+- DELETE
 
 #### URL Params
 
 Required:
 
-id=[string]
+- id=[string]
 
 #### Data Params
 
-None
+- None
 
-## Product Create
+### Product Create
 Returns json data about a single product.
 
 #### URL
 
-/products/add
+- /products/add
 
 #### Method:
 
-POST
+- POST
 
 #### URL Params
 
-None
+- None
 
 #### Data Params
 
-Product details
+- Product details
 
-## Get Product 
+### Get Product 
 Returns json data about a single product.
 
 #### URL
 
-/products/product/:id
+- /products/product/:id
 
 #### Method:
 
-GET
+- GET
 
 #### URL Params
 
 Required:
 
-id=[string]
+- id=[string]
 
 #### Data Params
 
-Product details
+- Product details
 
 
 
