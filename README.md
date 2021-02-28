@@ -88,17 +88,58 @@ products/add                        add a new product
 products/product/:id                get product based on id
 products/product/update/:id         update product based on id
 products/product/delete/:id         delete product based on id
+```
+### Users
 
-Users
-
-users/all                            get all users
-users/register                       add a new user
-users/login                          loggin for user
-users/user/:id                       get user based on id
-users/user/update/:id                update user based on id
-users/user/delete/:id                delete user based on id
+##### URL                               Method                      Url Params
 
 ```
+users/all                               GET                         get all users
+users/register                          POST                        add  new user
+users/login                             POST                        loggin for user
+users/user/:id                          GET                         id=[string] required  get user based on id
+users/user/update/:id                   PUT                         id=[string] required update user based on id
+users/user/delete/:id                   DELETE                      id=[string] required delete user based on id
+
+```
+## USERS
+
+Returns json data about a single user.
+
+####URL
+
+/users/user/:id
+
+####Method:
+
+GET
+
+####URL Params
+
+Required:
+
+id=[integer]
+
+####Data Params
+
+None
+
+Success Response:
+
+Code: 200
+Content: { id : 12, name : "Michael Bloom" }
+Error Response:
+
+Code: 404 NOT FOUND
+Content: { error : "User doesn't exist" }
+
+
+
+
+
+
+
+
 
 ### deployed 
 
