@@ -3,14 +3,15 @@
 
 A basic stock management web application  
 
-users can access and manage stock based on filtering  to see all inventory
-or to see which ones are running low in stock based on a threshhold or view based on category.
+This is a small admin page that the owner can use to add new item and add users. 
+To update and delete items or users you click on the item or user you want to update or delete.
+You can filter inventory based on category or  view items running low in stock.
 
 ### url
-Demo of the [stockmanagement app](https://pure-basin-41999.herokuapp.com/)
+Demo of the application -> [stockmanagement app](https://pure-basin-41999.herokuapp.com/)
 
 
-To start using the application you need to login as admin
+To start login as admin
 
 ``` diff
 name: admin
@@ -19,34 +20,34 @@ password: root1234
 ```
 
 
-### How to start the server 
+### starting the server 
 
 install dependencies and  run the server
 
 ### Dependencies
 
-to install dependencies - in the root directory and   client sub-directory.
+to install dependencies - in the root directory and  client sub-directory.
 
 ``` diff
   npm i
  ```
 
 ### running the server 
-in the root directory to start the server and navigate to client subdirectory to start the frontend
+in the root directory (server) and  client subdirectory (frontend)
 
 ```diff
 npm start  
 ```
-You can run concurrently run both the server and the frontend by using the following in the root directory.
+You can run concurrently both the server and the frontend   use the following in the root directory.
 
 ```diff
  npm run dev
  ```
 ### Libraries and frameworks
 
-- Express - a Node web framework for creating our custom server to 
-Write handlers for requests with different HTTP verbs at different URL paths (routes).
-Allows us to set settings like the port to use for connecting, additional request processing "middleware"
+- Express - a Node web framework for creating a custom server.
+Allows to write handlers for requests with different HTTP verbs at different URL paths (routes).
+Allows  to set settings like the port to use for connecting, additional request processing "middleware"
 and paths for our postbuild when in production. 
 
 - MongoDb Atlas cloud based  NoSQL database.
@@ -54,31 +55,30 @@ and paths for our postbuild when in production.
 - Mongoose a object modeling tool built on top of the MongoDb driver.Allows us to perform all the database
 operaions, that is creating, reading, updating and deleting data from our database and to define the schema of our database. 
 
-- bycrpt for hashing the passwords, this ensures our passwords are not vulnerable to attacks.
-when user login  we compare the loggin password details against our hashed password stored in the database.
+- bycrpt for hashing the passwords, this ensures our passwords are secure.
+When user login  we compare the loggin password details against our hashed password stored in the database.
 
 - JSON Web Token (JWT) to define a compact and self-contained way for securely transmitting information between parties as a JSON object. The information is digitally signed  hence secure and the information is 
 signed into the access-token that contains the logged in user information that will be accessed via cookies.
 
-- cookie-parser - parse Cookie header and populate req.cookies with an object keyed by the cookie names
+- cookie-parser - parse Cookie header and populate req.cookies with an object keyed by the cookie names - our JWT token
 
-- dotenv is a zero-dependency module that loads environment variables from a .env file into process.env this adds
-security so our passwords and login details for the Mongodb.
+- dotenv  a zero-dependency module that loads environment variables from a .env file into process.env this adds
+security to our passwords and login details for the Mongodb.
 
 - @hapi/joi - uses Joi which is an object schema description language and validator for JavaScript objects. Joi allows us to create blueprints or schemas for JavaScript objects to ensure validation of key information. When user inputs information it has to adhere to the schema otherwise it will be invalid and throws error. 
 
 
 - Pusher to update our data in realtime  without refreshing the page. It sits as a real-time layer between our server and frontend and maintains persistent connection between the server and the frontend. 
 
-- react-router-dom - convinient for single page application this avoids page reloading when navigating to different pages.
+- react-router-dom - convinient for single page application this avoids page reloading when navigating between different pages.
 
-- context api -to store the user logged in a particular session in our frontend application 
+- context api -for storing the logged in user in our frontend application 
 
 ### API
 
-Only admin and verified users have access. This adds a security layer to our API routes by using the JWT to verify users.
-User can only view the inventory 
-the base API access for inventory access is products/ and for users/ access is users 
+Only admin and verified users have access. This adds a security layer to our API routes by using the JWT to verify users and store the token for 24hours only.
+Used bcrypt to make sure passwords are hashed.
 
 ```
 Inventory
