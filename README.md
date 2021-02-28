@@ -80,28 +80,6 @@ security to our passwords and login details for the Mongodb.
 Only admin and verified users have access. This adds a security layer to our API routes by using the JWT to verify users and store the token for 24hours only.
 Used bcrypt to make sure passwords are hashed.
 
-```
-Inventory
-
-products/all                        get all the products
-products/add                        add a new product
-products/product/:id                get product based on id
-products/product/update/:id         update product based on id
-products/product/delete/:id         delete product based on id
-```
-### Users
-
-##### URL                               Method                      Url Params
-
-```
-users/all                               GET                         get all users
-users/register                          POST                        add  new user
-users/login                             POST                        loggin for user
-users/user/:id                          GET                         id=[string] required  get user based on id
-users/user/update/:id                   PUT                         id=[string] required update user based on id
-users/user/delete/:id                   DELETE                      id=[string] required delete user based on id
-
-```
 ## Show users
 
 Returns json data about all users.
@@ -222,9 +200,111 @@ id=[string]
 
 #### Data Params
 
-User Details
+User Detail
 
 
+## Show Products
+
+Returns json data about all products.
+
+#### URL
+
+/products/all
+
+#### Method:
+
+GET
+
+#### URL Params
+
+None
+
+#### Data Params
+
+Product details
+
+
+## Product Update
+Returns json data about a single product.
+
+#### URL
+
+/products/product/update/:id
+
+#### Method:
+
+PUT
+
+#### URL Params
+
+Required:
+
+id=[string]
+
+#### Data Params
+
+Product details
+
+## Product Delete
+Removes a single product from the database.
+
+#### URL
+
+/products/product/delete/:id
+
+#### Method:
+
+DELETE
+
+#### URL Params
+
+Required:
+
+id=[string]
+
+#### Data Params
+
+None
+
+## Product Create
+Returns json data about a single product.
+
+#### URL
+
+/products/add
+
+#### Method:
+
+POST
+
+#### URL Params
+
+None
+
+#### Data Params
+
+Product details
+
+## Get Product 
+Returns json data about a single product.
+
+#### URL
+
+/products/product/:id
+
+#### Method:
+
+GET
+
+#### URL Params
+
+Required:
+
+id=[string]
+
+#### Data Params
+
+Product details
 
 
 
