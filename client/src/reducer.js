@@ -4,7 +4,6 @@ export const initialState = {
     user: null
 }
 
-//set to the login user
 function reducer(state, action){
 
     if(action.type === "USER")
