@@ -14,11 +14,13 @@ const productSchema = mongoose.Schema({
           },
           price: {
                type: Number, 
-               required: true
+               required: true,
+               min: 0
           },
           quantity: {
                type: Number, 
-               required: true
+               required: true,
+               min: 0,
           },
           category: {
                type: String, 
@@ -26,7 +28,12 @@ const productSchema = mongoose.Schema({
           },
 });
 
-/**
- * creating the product from schema
- */
+
+productSchema
+.virtual('url')
+.get(function () {
+  return '/products/product/'+this._id;
+});
+
+
 export default  mongoose.model('Product', productSchema);

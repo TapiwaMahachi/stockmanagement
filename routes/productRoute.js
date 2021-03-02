@@ -2,87 +2,96 @@ import express from 'express';
 import Product from '../models/product.js';
 import verifyUser from './verifyToken.js';
 
+
 const router = express.Router();
 
 //get all products
-router.get('/all', (req, res)=>{
-    
-    Product.find((err, data)=>{
-        if(err)
-            res.status(500).send(err);
-        else
-            res.status(200).send(data);
-    })
+router.get('/all', verifyUser,(req, res, next)=>{
+     //verifying if the user is admin
+   
+    Product.find({}, (err, data)=>{
 
+        if(err){return next(err)} 
+        else{  
+         res.status(200).send(data);
+        }
+    })
 })
 //get product
-router.get('/product/:id',(req, res)=>{
-    const id = req.params.id;
-    Product.findById(id,(err, data)=>{
+router.get('/product/:id',(req, res, next)=>{
+
+    Product.findById({_id: req.params.id} , (err, data)=>{
         if(err){
-            res.status(500).send(err)
-        }else{
-            res.status(201).send(data)
+           return next(err) 
         }
+        if(data === null){
+            var err = new Error("Product not found")
+            err.status = 404;
+            next(err)
+        }
+        
+         res.status(201).send(data)
+        
     })
 })
 
 //add product to db
-router.post('/add',verifyUser, (req, res) =>{
+router.post('/add',verifyUser,(req, res, next) =>{
 
     //verifying if the user is admin
     const {admin} = req.user;
-    if(!admin)
-        return res.status(403).send('Not an admin')
-
-    //getting the product from the body
-    const product = req.body;
+    if(!admin){
+        const err = new Error('User is not admin');
+        err.status = 403;
+        next(err)
+    }
 
     //add  product to the database
-    Product.create(product,(err, data)=>{
+    Product.create( req.body ,(err, data)=>{
         if(err)
-            res.status(500).send(err);
+           return next(err)
         else
             res.status(201).send(data);
     });
 })
 
 //updating product
-router.put('/product/update/:id',verifyUser,  (req, res)=>{
+router.put('/product/update/:id',verifyUser,  (req, res, next)=>{
 
      //verifying if the user is admin
     const {admin} = req.user;
-    if(!admin)
-        return res.status(403).send('Not an admin');
 
-    //get the new product from the body
-    const product = req.body;
-    //get product id from url
-    const id = req.params.id
-
+     if(!admin){
+        const err = new Error('User is not admin');
+        err.status = 403;
+        next(err)
+    }
     //find the product using id
-    Product.updateOne({_id: id}, {...product},(err , data)=>{
-        if(err)
-          res.status(500).send(err);
-        else
-          res.status(201).send(data);
+    Product.updateOne({_id: req.params.id},
+         //spread syntax
+         {...req.body},
+         (err , data)=>{
+
+        if(err){return next(err)}
+        else{ res.status(201).send(data)};
     });
 
 })
 //delete product
-router.delete('/product/delete/:id',verifyUser, (req, res)=>{
+router.delete('/product/delete/:id', verifyUser, (req, res,next)=>{
 
-     //verifying if the user is admin
+    //verifying if the user is admin
     const {admin} = req.user;
-    if(!admin)
-        return res.status(403).send('Not an admin');
+    if(!admin){
+        const err = new Error('User is not admin');
+        err.status = 403;
+        next(err)
+    }
 
-    //get product id from url
-    const id = req.params.id;
     //delete using id
-    Product.deleteOne({_id: id}, (err,data)=>{
+    Product.deleteOne({_id: req.params.id}, (err,data)=>{
         if(err){
-            res.status(500).send(err)
+            return next(err)
         }else{
             res.status(201).send(data)
         }

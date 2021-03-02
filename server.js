@@ -1,5 +1,6 @@
 //imports
 import express from "express";
+import createError from "http-errors";
 import mongoose from 'mongoose';
 import Pusher from 'pusher';
 import cors from 'cors';
@@ -82,9 +83,9 @@ app.use(function(err, req, res, next) {
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
+  // show error  msg
   res.status(err.status || 500);
-  res.render('error');
+  res.send(`error ${err.message}`);
 });
 
 //listen

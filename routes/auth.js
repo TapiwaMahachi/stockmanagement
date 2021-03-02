@@ -40,7 +40,7 @@ router.post('/register',verifyUser, async (req, res)=>{
 })
 
 //login
-router.post('/login',  async (req, res)=>{
+router.post('/login',  async (req, res,next)=>{
 
     //validate the user details 
     const {error} = loginValidation(req.body);
@@ -49,9 +49,9 @@ router.post('/login',  async (req, res)=>{
 
      //checking if user exists in the database- if not return 
      const user = await User.findOne({email: req.body.email});
-     if(!user) 
+     if(!user) {
         return res.status(400).send('Email or Password is wrong');
-
+     }
     //check if password is correct - if not return 
     //--using bcrypt to compare the password entered against the hashed password stored in the db
     const validPassword =  bcrypt.compareSync(req.body.password, user.password);
@@ -74,7 +74,7 @@ router.post('/login',  async (req, res)=>{
 
 })
 //get all users
-router.get('/all',verifyUser, (req, res)=>{
+router.get('/all',verifyUser, (req, res,next)=>{
 
     const admin =req.user.admin;
     if(!admin){
@@ -83,7 +83,7 @@ router.get('/all',verifyUser, (req, res)=>{
     //get all the Users
     User.find((err, data)=>{
         if(err){
-            res.status(500).send(err);
+            return next(err)
         }else{
             res.status(201).send(data);
         };

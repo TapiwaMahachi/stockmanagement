@@ -3,7 +3,7 @@
 
 /**
  * registration input details validation
- * @param {objetc} data 
+ * 
  */
 const userRegistrationValidation =(data)=>{
     
