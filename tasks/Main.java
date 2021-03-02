@@ -1,8 +1,7 @@
 
 
 /*
- * Credit to stackoverflow and google  thats how i learned this code 
- * Was coding along the tutorials and did a lot of research not my own work 
+ * Credit to stackoverflow and google  
 */
 
 import java.util.*; 
