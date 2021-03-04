@@ -21,8 +21,10 @@ function UpdateProduct(props) {
 
     //getting id from the url
     const {id} =useParams();
+    
     //redirecting 
     const history= useHistory();
+
     //getting user input
     const handleChange =e=>{
         e.preventDefault();
@@ -76,7 +78,7 @@ function UpdateProduct(props) {
     //function called to delete the product
     const handleDelete=()=>{
         //delete based on id
-        const fetchProduct = async()=>{
+        const deleteProduct = async()=>{
             const res = await fetch(`/products/product/delete/${id}`,{
                 method: 'delete'
             });
@@ -88,7 +90,7 @@ function UpdateProduct(props) {
                 props.reset();
             }
         }
-        fetchProduct()
+        deleteProduct()
         .catch(e =>setSuccess({
             ...success, 
             message:e.message, 

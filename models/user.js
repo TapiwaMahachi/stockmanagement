@@ -28,5 +28,12 @@ const userSchema = new mongoose.Schema({
     }
 });
 
+userSchema
+.virtual('url')
+.get(function () {
+  return '/users/user/'+this._id;
+});
+
+
 export default  mongoose.model('User', userSchema);
   

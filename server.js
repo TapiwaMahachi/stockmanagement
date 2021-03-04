@@ -10,6 +10,7 @@ import path from 'path';
 
 import {authRoute} from './routes/auth.js';
 import { prodRoute } from "./routes/productRoute.js";
+import { supplierRoutes } from "./routes/supplierRoutes.js";
 
 //config the env
 dotenv.config(); 
@@ -62,6 +63,8 @@ db.once('open', ()=>{
 app.use('/users', authRoute);
 
 app.use('/products', prodRoute);
+
+app.use('/suppliers', supplierRoutes);
 
 //serve static assets if in production
 if(process.env.NODE_ENV === 'production'){
