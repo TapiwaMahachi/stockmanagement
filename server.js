@@ -64,7 +64,7 @@ app.use('/users', authRoute);
 
 app.use('/products', prodRoute);
 
-app.use('/suppliers', supplierRoutes);
+app.use('/', supplierRoutes);
 
 //serve static assets if in production
 if(process.env.NODE_ENV === 'production'){
