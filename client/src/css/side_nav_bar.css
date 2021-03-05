@@ -1,0 +1,27 @@
+.left{
+    width: 15%;
+    padding-top: 2em;
+    border-right: 1px solid var(--clr-border);
+    margin-left: 2em;
+    display: flex;
+    flex-direction: column;
+    top:0;
+    bottom: 0;
+    left: 0;
+    height: 100vh;
+}
+.left__btn{
+    min-height: 30px;
+    color: var(--clr-text);
+    padding: .5em;
+    font-weight: var(--fw-bold);
+    cursor: pointer;
+    font-size: var(--fs-med);
+    outline: 0;
+    border: 0;
+    background: transparent;
+    text-align: left;
+}
+.left__btn:hover{
+    color: var(--clr-primary);
+}

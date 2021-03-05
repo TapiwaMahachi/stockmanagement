@@ -60,7 +60,6 @@ function Users(props) {
                 <tr>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Password</th>
                     <th scope="col">Role</th>
                 </tr>
             </thead>
@@ -68,12 +67,11 @@ function Users(props) {
                 {users.map(user => 
                 <tr 
                     key={user._id} 
-                    className="product__list"
+                    className="list"
                     onClick={e =>props.handleClick(user._id)}
                 >
                         <td >{user.name}</td>
                         <td>{user.email}</td>
-                        <td>{user.password}</td>
                         <td>{user.admin ?"admin":"user"}</td>
                     </tr>
                 )}

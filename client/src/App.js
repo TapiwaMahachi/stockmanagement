@@ -13,12 +13,12 @@ function App() {
     <Router>
       <Header/>
       <Switch>
-        <Route path="/admin/:id?/:user?/:inventory?">
+        <Route path="/admin/:id?">
           <Admin />
         </Route>
-          <Route path="/">
+        <Route path="/">
           <Login/>
-         </Route>
+        </Route>
       </Switch>  
     </Router>
   );

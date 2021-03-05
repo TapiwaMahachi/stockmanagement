@@ -1,25 +1,30 @@
 import React, {  useState } from 'react'
-import {button, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 import '../css/admin.css';
 import Inventory from './Inventory';
 import Users from './Users';
-import { useStateValue } from '../StateProvider';
+import SideNavBar from './SideNavBar';
+import Suppliers from './Suppliers';
 
 
 
 
 function Admin() {
 
-   //get user from the context
-   const [{user},]= useStateValue();
-
+    //state for managing components to add or edit
     const [navPanel , setNavPanel] = useState({
         isAdd: false,
         isUser: false,
         isUpdating: false,
-        isInventory: true,
+        
     })
-    const { isInventory} = navPanel;
+    //state for managing component to display
+    const [view, setView] = useState({
+        viewInventory: true,
+        viewSupplier: false,
+        viewUser: false
+    })
+    const { viewInventory, viewSupplier, viewUser} = view;
 
     //hook to add the id to the url
     const history = useHistory();
@@ -39,54 +44,27 @@ function Admin() {
  
     return (
         <section className="admin">
-            <div className="left">
-                <button 
-                    className="left__btn"
-                    onClick={e=>{
-                        history.push('/admin/inventory')
-                        setNavPanel({
-                            ...navPanel, 
-                            isInventory: true, 
-                            isUser:false, 
-                            isUpdating: false, 
-                            isAdd:false
-                        })
-                    }}
-                >
-                    <p>Inventory</p>
-                </button>
-                {
-                user?.admin &&
-                 <button 
-                    className="left__btn"
-                    onClick={e=>{
-                        history.push('/admin/users')
-                        setNavPanel({
-                            ...navPanel, 
-                            isInventory: false, 
-                            isUser:false,
-                            isUpdating:false
-                        }) }
-                    }
-                 >
-                    <p>Users</p>
-                 </button>
-                }
-            </div>
+            <SideNavBar setView ={setView} />
             <div className="right">
                 <div className="admin__bottom">
-                    {isInventory ?
+                   { viewInventory &&
                     <Inventory 
                         handleClick={handleClick} 
                         navPanel={navPanel}
                         setNavPanel={setNavPanel}
                     />
-                    :<Users 
+                   }
+                   {
+                    viewUser &&<Users 
                         handleClick={handleClick}
                         navPanel={navPanel}
                         setNavPanel={setNavPanel}
                     />
-                    }
+                   }
+                   {
+                    viewSupplier &&
+                    <Suppliers/>
+                   } 
                 </div>
             </div>
         </section>

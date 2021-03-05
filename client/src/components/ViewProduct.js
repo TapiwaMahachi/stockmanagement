@@ -88,7 +88,7 @@ function ViewProduct(props) {
 
             if(res.ok){
                 history.push('/admin')
-                props.reset();
+                props.setView(false);   
             }
         }
         deleteProduct()
@@ -107,7 +107,7 @@ function ViewProduct(props) {
             ok: false, 
             err: false
         })
-        props.reset();
+        props.setView(false)
     }
 
     //populating the input feilds with the product properties
@@ -168,3 +168,4 @@ function ViewProduct(props) {
 }
 
 export default ViewProduct
+

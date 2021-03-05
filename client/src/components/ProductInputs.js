@@ -39,7 +39,7 @@ function ProductInputs(props) {
                 type="text"
                 required
                 onChange={props.handleChange}
-            />
+            /> 
         </div>
 
     )

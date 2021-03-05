@@ -2,6 +2,8 @@ import React,{useState,useEffect} from 'react';
 import UpdateProduct from './UpdateProduct';
 import CreateProduct from './CreateProduct';
 import Pusher from 'pusher-js';
+import ViewProduct from './ViewProduct';
+import { useHistory } from 'react-router-dom';
 
 
 //functions to use when filtering 
@@ -23,10 +25,14 @@ function Products(props) {
 
       //hook for all products
     const [data, setData] =useState([]);
+    //state for viewing product
+    const [view, setView] = useState(false);
 
    //hook to filter products
     const [filter, setFilter] = useState('All');
 
+    //state for rerouting
+    const history= useHistory();
     //filtering based on category
     const handleFilter=e=>{
         e.preventDefault();
@@ -47,7 +53,7 @@ function Products(props) {
         .catch(console.log)
 
     },[data]);
-   
+    
    
     //updating our component in real time
     useEffect(()=>{
@@ -67,6 +73,8 @@ function Products(props) {
 
     return (
         <>
+        {view ? <ViewProduct setView={setView} /> :
+            <>
             <div className="admin__top">
                <div className="admin__title">
                 <h2>Inventory Summary</h2>
@@ -122,8 +130,11 @@ function Products(props) {
                     {data.filter(FILTER_MAP[filter]).map(prod => 
                         <tr 
                             key={prod._id} 
-                            className="product__list"
-                            onClick={()=>props.handleClick(prod._id)}
+                            className="list"
+                            //onClick={()=>props.handleClick(prod._id)}
+                            onClick={e =>{
+                                history.push(`/admin/${prod._id}`)
+                                setView(true)}}
                         >
                             <td >{prod.title}</td>
                             <td>{prod.quantity}</td>
@@ -132,7 +143,9 @@ function Products(props) {
                         </tr>
                     )}
                 </tbody>
-            </table>  
+            </table> 
+           </>
+        } 
         </>
     )
 }

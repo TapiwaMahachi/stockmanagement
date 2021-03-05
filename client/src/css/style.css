@@ -49,3 +49,31 @@ a{
     height: 100vh;
     margin: 0 ;
 }
+table{
+    width: 100%;
+}
+thead {
+    background: var(--clr-btn);
+    color: var(--clr-text);
+    border-bottom: 1px solid var(--clr-border);
+    
+}
+th{
+    width: 25%;
+    height: 7vh;
+}
+tbody {
+    background-color: #e4f0f5;
+}
+td{
+    text-align: left;
+    
+}
+.list{
+    height: 5vh;
+}
+.list:hover{
+    background: var(--clr-border);
+    cursor: pointer;
+    color: var(--clr-primary);
+}
