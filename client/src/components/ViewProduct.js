@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from 'react'
+import React,{useEffect, useRef, useState} from 'react'
 import {useHistory, useParams } from 'react-router-dom';
 import ProductInputs from './ProductInputs';
 import '../css/viewproduct.css';
@@ -61,8 +61,7 @@ function ViewProduct(props) {
                     title: '',
                     price: '',
                     quantity: '',
-                    category: '',
-                    supplier: '', 
+                    category: ''
                 })
                 //go back to main page
                 history.push('/admin/')
@@ -114,23 +113,33 @@ function ViewProduct(props) {
 
     //populating the input feilds with the product properties
     useEffect(()=>{
+        const abort = new AbortController();
+        const signal = abort.signal;
+
         const fetchProduct = async ()=>{
             
             if(id === undefined) return
-            const res = await fetch(`/products/product/${id}`);
+            const res = await fetch(`/products/product/${id}`,{signal: signal});
 
             if(res.ok){
                 const data = await res.json();
+                console.log('Data from the fetched supplier', data)
                 setProduct(data);
             }
         }
-        fetchProduct();
+        fetchProduct()
+        .catch(console.log);
+
+        //cleanup
+        return ()=> abort.abort();
     },[id])
     const [suppliers,setSuppliers] = useState([]);
 
     useEffect(()=>{
+        const abort = new AbortController();
+        const signal = abort.signal;
         const fetchSupplier = async ()=>{
-            const res = await fetch('/suppliers/all');
+            const res = await fetch('/suppliers/all',{signal:signal});
             if(res.ok){
                 const supplier = await res.json();
                 setSuppliers(supplier)
@@ -138,7 +147,29 @@ function ViewProduct(props) {
         }
         fetchSupplier()
         .catch(console.log)
-    })
+        return ()=> abort.abort();
+    },[])
+    //ref to addd supplier
+    const suppRef = useRef()
+    const addSupplier = async (e)=>{
+        e.preventDefault();
+         
+        const supplierId =suppRef.current.value;
+        console.log(`Stringfyied Id: ${JSON.stringify(supplierId)}`);
+        try{
+            const res = await fetch(`/suppliers/product/${id}/supplier`,{
+                method: "post",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({supplier: supplierId})
+            })
+            if(res.ok){
+                //act here show dialog
+            }
+        }catch{
+           const error = new Error('Cannot Add Supplier');
+           console.log(error)
+        }
+    }
 
     return (
         <div className="product-details">
@@ -161,12 +192,27 @@ function ViewProduct(props) {
                 }
                
             </form> 
-            <div className="add-supplier">
-                <input className="add-s-btn" type="button" name="supplier" value={'Add Supplier'}/>
-                <select>
-                    {suppliers.map(supplier => <option key={supplier._id} value={supplier.name}>{supplier.name}</option>)}
-                </select>
+            <div className="supplier-view">
+                <label>Supplier</label>
+                {product.supplier?.map(sup =><p key={sup?._id}>{sup?.name}</p>)}
             </div>
+            <form className="add-supplier" onSubmit={addSupplier}>
+                <button 
+                    className="add-s-btn" 
+                    type="submit"
+                >
+                    Add Supplier
+                </button>
+                <select name="supplier" ref={suppRef}>
+                    {suppliers.map(supplier => 
+                    <option 
+                        key={supplier._id} 
+                        value={supplier._id}
+                    >
+                        {supplier.name}
+                    </option>)}
+                </select>
+            </form>
              <div className="update">
                     <button 
                         type="submit" 

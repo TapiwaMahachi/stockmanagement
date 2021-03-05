@@ -1,5 +1,6 @@
 import express from 'express';
 import Product from '../models/product.js';
+import Supplier from '../models/supplier.js'
 import verifyUser from './verifyToken.js';
 
 
@@ -20,17 +21,24 @@ router.get('/all', verifyUser,(req, res, next)=>{
 //get product
 router.get('/product/:id',(req, res, next)=>{
 
-    Product.findById({_id: req.params.id} , (err, data)=>{
-        if(err){
+    Product.findById({_id: req.params.id})
+     .populate('supplier') //associating our product with the supplier
+     .exec( (err, product)=>{
+
+         //findind suppliers not in our product supplier list
+          Supplier.find({_id : {$nin : product.supplier}},(err, suppliers)=>{
+       
+          if(err){
            return next(err) 
-        }
-        if(data === null){
+           }
+           if(product === null){
             var err = new Error("Product not found")
             err.status = 404;
             next(err)
-        }
-        
-         res.status(201).send(data)
+           }
+           console.log(`${suppliers}  ${product}`)
+           res.status(201).send(product)
+        })
         
     })
 })
@@ -97,5 +105,6 @@ router.delete('/product/delete/:id', verifyUser, (req, res,next)=>{
         }
     })
 })
+
 
 export { router as prodRoute};

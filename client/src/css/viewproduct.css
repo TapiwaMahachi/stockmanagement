@@ -33,3 +33,7 @@
     background: var(--clr-border);
     color: var(--clr-text);
 }
+.supplier-view{
+    display: flex;
+    justify-content: space-between;
+}

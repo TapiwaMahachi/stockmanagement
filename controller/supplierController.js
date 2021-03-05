@@ -1,10 +1,12 @@
 import express from 'express'
 import {body, validationResult} from 'express-validator';
 import Supplier from '../models/supplier.js';
+import Product from '../models/product.js';
 
 export  {
     all_suppliers ,
-    add_supplier 
+    create_supplier, 
+    add_supplier
 }
 
 //handle supplier get 
@@ -17,7 +19,7 @@ const all_suppliers=(req, res, next)=>{
 }
 
 //handle supplier create on POST
-const add_supplier =[
+const create_supplier =[
 
     //validate and sanitize the results
     body('name', 'Enter valid supplier name').trim().isLength({min: 1}).escape(),
@@ -48,3 +50,16 @@ const add_supplier =[
 
     }
 ]
+
+//associating our suplier to the product
+
+const add_supplier =(req, res, next)=>{
+    Product.findById({_id: req.params.id},(err, product)=>{
+        product.supplier.push(req.body.supplier);
+        console.log(`Supplier from the body ${req.body}`)
+        product.save(function(err){
+            if(err) return next(err)
+            res.status(201).send('sucesss')
+        });
+    })
+}

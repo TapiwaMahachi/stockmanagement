@@ -39,16 +39,7 @@ function ProductInputs(props) {
                 type="text"
                 required
                 onChange={props.handleChange}
-            /> 
-            <label>Supplier</label>
-            <input
-                className="inputs"
-                value={props.product.supplier} 
-                name="supplier"
-                type="text"
-                required
-                onChange={props.handleChange}
-            /> 
+            />  
         </div>
 
     )

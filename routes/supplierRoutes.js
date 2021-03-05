@@ -1,5 +1,5 @@
 import express from 'express';
-import {all_suppliers ,  add_supplier} from '../controller/supplierController.js';
+import {all_suppliers ,  create_supplier, add_supplier} from '../controller/supplierController.js';
 
 const router = express.Router();
 
@@ -7,7 +7,9 @@ const router = express.Router();
 router.get('/suppliers/all', all_suppliers);
 
 //add new supplier
-router.post('/suppliers/supplier/create', add_supplier);
+router.post('/suppliers/supplier/create', create_supplier);
 
+//route to associate our supplier to the product
+router.post('/suppliers/product/:id/supplier', add_supplier);
 
 export  {router as supplierRoutes};

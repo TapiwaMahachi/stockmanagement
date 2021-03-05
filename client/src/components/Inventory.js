@@ -39,19 +39,24 @@ function Products(props) {
         setFilter(e.target.value);
     }
     //fetching data from the api
-    const fetchData = async ()=>{
-        const res = await fetch('/products/all'); 
+  
+    //fetch all data
+    useEffect(()=>{
+        const abort = new AbortController();
+        const signal = abort.signal;
+        const fetchData = async ()=>{
+        const res = await fetch('/products/all',{signal: signal}); 
         if(res.ok) {
             const prod = await res.json()
             setData(prod)
         }   
-    }
-    //fetch all data
-    useEffect(()=>{
+      }
 
         fetchData()
         .catch(console.log)
-
+        //cleanup
+     return ()=> abort.abort();
+     
     },[data]);
     
    
