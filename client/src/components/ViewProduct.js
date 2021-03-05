@@ -149,8 +149,11 @@ function ViewProduct(props) {
         .catch(console.log)
         return ()=> abort.abort();
     },[])
-    //ref to addd supplier
+
+    //ref to select 
     const suppRef = useRef()
+
+    //adding suppliers to our products
     const addSupplier = async (e)=>{
         e.preventDefault();
          
@@ -174,8 +177,7 @@ function ViewProduct(props) {
     return (
         <div className="product-details">
           <div className="product-navbar">
-              
-
+              <h1>Product Details</h1>
           </div>
          <div className="create">
             {ok && 

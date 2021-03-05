@@ -7,6 +7,12 @@
     width: 30%;
     height: 40px;
     border: 1px solid var(--clr-border);
+    outline: 0;
+    cursor: pointer;
+    font-size: var(--fs-body);
+    font-weight: var(--fw-reg);
+    text-align: left;
+    border-radius: 5px;
 }
 
 .update > button , .delete-cancel>button{
@@ -36,4 +42,17 @@
 .supplier-view{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    min-height: 40px ;
+}
+.supplier-view > label{
+    font-size: var(--fs-body);
+    font-weight: var(--fw-bold);
+    color: var(--clr-text);
+}
+.product-navbar > h1{
+    font-size: var(--fs-med);
+    font-weight: var(--fw-bold);
+    color: var(--clr-text);
+    margin-top: 1em;
 }
