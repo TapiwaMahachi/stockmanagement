@@ -1,13 +1,13 @@
 .create{
     width: 50%;
-    margin: auto;
+    margin: 2em auto;
     border: 1px solid var(--clr-border);
-}
-.form, .create__delete{
-    width: 100%;
     padding: 1em;
 }
-.create__delete{
+.form {
+    width: 100%;
+}
+.delete-cancel{
     padding-top: 0;
 }
 .create_inputs{
@@ -33,37 +33,12 @@
 .inputs:focus{
     border-color: var(--clr-btn);
 }
-.create__btns{
-    width: 100%;
-}
+
 .create__delete{
     display: flex;
     flex-direction: row;
 }
-.create__btns > button , .create__delete>button{
-    cursor: pointer;
-    text-transform: uppercase;
-    background: var(--clr-btn);
-    margin: .2em;
-    border: 0;
-    outline: 0;
-    display: inline-block;
-    color: var(--clr-accent);
-    padding: .5em;
-    font-size: var(--fs-body);
-    font-weight: var(--fw-reg);
-    width: 100%;
-    border-radius: 5px;
-    
-}
-.create__delete > button{
-    background:rgb(179, 66, 66);
-    
-}
-.create__delete> .cancel-btn, .create__btns > .btn-cancel{
-    background: var(--clr-border);
-    color: var(--clr-text);
-}
+
 .success, .error{
     width: 50%;
     margin: auto;

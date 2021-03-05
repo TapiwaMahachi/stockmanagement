@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import {useHistory, useParams } from 'react-router-dom';
 import ProductInputs from './ProductInputs';
+import '../css/viewproduct.css';
 
 
 function ViewProduct(props) {
@@ -60,7 +61,8 @@ function ViewProduct(props) {
                     title: '',
                     price: '',
                     quantity: '',
-                    category: '', 
+                    category: '',
+                    supplier: '', 
                 })
                 //go back to main page
                 history.push('/admin/')
@@ -124,9 +126,27 @@ function ViewProduct(props) {
         }
         fetchProduct();
     },[id])
+    const [suppliers,setSuppliers] = useState([]);
+
+    useEffect(()=>{
+        const fetchSupplier = async ()=>{
+            const res = await fetch('/suppliers/all');
+            if(res.ok){
+                const supplier = await res.json();
+                setSuppliers(supplier)
+            }
+        }
+        fetchSupplier()
+        .catch(console.log)
+    })
 
     return (
-        <div className="create">
+        <div className="product-details">
+          <div className="product-navbar">
+              
+
+          </div>
+         <div className="create">
             {ok && 
                 <div className={err ?'error':'success'}>
                     <p>{err ? message : "Product SuccessFully Updated"}</p>
@@ -139,16 +159,24 @@ function ViewProduct(props) {
                     product={product}
                 />
                 }
-                <div className="create__btns">
+               
+            </form> 
+            <div className="add-supplier">
+                <input className="add-s-btn" type="button" name="supplier" value={'Add Supplier'}/>
+                <select>
+                    {suppliers.map(supplier => <option key={supplier._id} value={supplier.name}>{supplier.name}</option>)}
+                </select>
+            </div>
+             <div className="update">
                     <button 
                         type="submit" 
                         className="btn-add"
+                        onClick={handleSubmit}
                     >
                         Update Product
                     </button>
                 </div>
-            </form> 
-             <div className="create__delete">
+             <div className="delete-cancel">
                 <button 
                     type="submit"  
                     className="btn-delete"
@@ -163,6 +191,7 @@ function ViewProduct(props) {
                     Cancel
                 </button>
             </div>
+         </div>
         </div>
     )
 }

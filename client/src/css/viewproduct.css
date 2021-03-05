@@ -1,0 +1,35 @@
+.add-supplier{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.add-s-btn{
+    width: 30%;
+    height: 40px;
+    border: 1px solid var(--clr-border);
+}
+
+.update > button , .delete-cancel>button{
+    cursor: pointer;
+    text-transform: uppercase;
+    background: var(--clr-btn);
+    margin: .2em;
+    border: 0;
+    outline: 0;
+    display: inline-block;
+    color: var(--clr-accent);
+    padding: .5em;
+    font-size: var(--fs-body);
+    font-weight: var(--fw-reg);
+    width: 100%;
+    border-radius: 5px;
+    
+}
+.delete-cancel> .btn-delete {
+    background:rgb(179, 66, 66);
+    
+}
+.delete-cancel>.cancel-btn{
+    background: var(--clr-border);
+    color: var(--clr-text);
+}
