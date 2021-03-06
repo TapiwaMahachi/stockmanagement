@@ -34,7 +34,8 @@ function Users(props) {
                         ...props.navPanel, 
                         isUser:true, 
                         isAdd:false, 
-                        isUpdating:false
+                        isUpdating:false,
+                        isSupplier: false
                     })}
                 >
                     Create New User

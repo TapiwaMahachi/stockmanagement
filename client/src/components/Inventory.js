@@ -43,6 +43,7 @@ function Products(props) {
     useEffect(()=>{
         const abort = new AbortController();
         const signal = abort.signal;
+
         const fetchData = async ()=>{
         const res = await fetch('/products/all',{signal: signal}); 
         if(res.ok) {
@@ -53,6 +54,7 @@ function Products(props) {
 
         fetchData()
         .catch(console.log)
+        
         //cleanup
      return ()=> abort.abort();
      
@@ -88,7 +90,8 @@ function Products(props) {
                             ...props.navPanel,
                             isAdd:true,
                             isUser:false, 
-                            isUpdating:false
+                            isUpdating:false,
+                            isSupplier: false
                         })}
                     >
                          Add New Product

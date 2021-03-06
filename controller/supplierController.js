@@ -24,7 +24,6 @@ const create_supplier =[
     //validate and sanitize the results
     body('name', 'Enter valid supplier name').trim().isLength({min: 1}).escape(),
     body('email','Invalid Email').isEmail().normalizeEmail(),
-    body('url','Invalid Url').isURL(),
 
      async (req, res, next) =>{
         const errors = validationResult(req)
@@ -35,7 +34,7 @@ const create_supplier =[
         else{
 
             //check if supplier exists
-            const supplier =  await Supplier.findOne({email: req.body.email}).exec();
+            const supplier =  await Supplier.findOne({email: req.body.email});
 
             if(supplier){
                 const err =  new Error('Supplier Already Exists')

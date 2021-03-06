@@ -16,6 +16,7 @@ function Admin() {
         isAdd: false,
         isUser: false,
         isUpdating: false,
+        isSupplier: false,
         
     })
     //state for managing component to display
@@ -36,7 +37,8 @@ function Admin() {
            ...navPanel, 
            isUpdating: true, 
            isUser:false,
-           isAdd:false
+           isAdd:false,
+           isSupplier: false,
         })
         //adding the id to the url
         history.push(`/admin/${id}`)    
@@ -63,7 +65,11 @@ function Admin() {
                    }
                    {
                     viewSupplier &&
-                    <Suppliers/>
+                    <Suppliers
+                        setNavPanel={setNavPanel}
+                        navPanel={navPanel}
+                        handleClick={handleClick}
+                    />
                    } 
                 </div>
             </div>

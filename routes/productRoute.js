@@ -36,7 +36,6 @@ router.get('/product/:id',(req, res, next)=>{
             err.status = 404;
             next(err)
            }
-           console.log(`${suppliers}  ${product}`)
            res.status(201).send(product)
         })
         

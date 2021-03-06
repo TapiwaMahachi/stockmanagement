@@ -64,7 +64,7 @@ app.use('/users', authRoute);
 
 app.use('/products', prodRoute);
 
-app.use('/', supplierRoutes);
+app.use('/suppliers', supplierRoutes);
 
 //serve static assets if in production
 if(process.env.NODE_ENV === 'production'){
@@ -82,10 +82,6 @@ app.use(function(req, res, next) {
 
 //error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
   // show error  msg
   res.status(err.status || 500);
   res.send(`error ${err.message}`);

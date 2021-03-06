@@ -4,12 +4,12 @@ import {all_suppliers ,  create_supplier, add_supplier} from '../controller/supp
 const router = express.Router();
 
 //get all suppliers
-router.get('/suppliers/all', all_suppliers);
+router.get('/all', all_suppliers);
 
 //add new supplier
-router.post('/suppliers/supplier/create', create_supplier);
+router.post('/supplier/add', create_supplier);
 
 //route to associate our supplier to the product
-router.post('/suppliers/product/:id/supplier', add_supplier);
+router.post('/supplier/product/:id/', add_supplier);
 
 export  {router as supplierRoutes};

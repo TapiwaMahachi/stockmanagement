@@ -165,7 +165,7 @@ function ViewProduct(props) {
         const supplierId =suppRef.current.value;
         
         try{
-            const res = await fetch(`/suppliers/product/${id}/supplier`,{
+            const res = await fetch(`/suppliers/supplier/product/${id}`,{
                 method: "post",
                 headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({supplier: supplierId})
