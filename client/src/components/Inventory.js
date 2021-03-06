@@ -1,5 +1,4 @@
 import React,{useState,useEffect} from 'react';
-import UpdateProduct from './UpdateProduct';
 import CreateProduct from './CreateProduct';
 import Pusher from 'pusher-js';
 import ViewProduct from './ViewProduct';
@@ -21,7 +20,7 @@ const FILTER_NAMES = Object.keys(FILTER_MAP);
 function Products(props) {
       
     //properties for updating and deleting components
-    const {isAdd, isUpdating} = props.navPanel;
+    const {isAdd} = props.navPanel;
 
       //hook for all products
     const [data, setData] =useState([]);
@@ -113,14 +112,6 @@ function Products(props) {
                     })}
                 />
              }
-            {isUpdating && 
-                <UpdateProduct 
-                  reset={e=>props.setNavPanel({
-                      ...props.navPanel,
-                      isUpdating:false
-                    })}
-                />
-            }
             </div>
             <table className=" admin__list">
                 <thead className="headers">

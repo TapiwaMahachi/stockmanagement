@@ -52,9 +52,12 @@ const create_supplier =[
 ]
 
 //associating our suplier to the product
-
 const add_supplier =(req, res, next)=>{
+    
     Product.findById({_id: req.params.id},(err, product)=>{
+
+        if(err) return next(err);
+
         product.supplier.push(req.body.supplier);
         console.log(`Supplier from the body ${req.body}`)
         product.save(function(err){

@@ -31,10 +31,14 @@ function UserInputs(props) {
                 placeholder="Enter password"
                 onChange={props.handleChange}
             />
-            <select required name="admin" onChange={props.handleChange}>
-                <option value={false}>user</option>
-                <option value={true}>admin</option>
-            </select> 
+            <div className="role">
+                <label>Select Role</label>
+                <select required name="admin" onChange={props.handleChange}>
+                    <option value={false}>user</option>
+                    <option value={true}>admin</option>
+                </select> 
+            </div>
+            
          </div>
     )
 }

@@ -1,11 +1,13 @@
 import React,{useEffect, useRef, useState} from 'react'
 import {useHistory, useParams } from 'react-router-dom';
 import ProductInputs from './ProductInputs';
+import {useStateValue} from '../StateProvider';
 import '../css/viewproduct.css';
 
 
 function ViewProduct(props) {
-
+    //get the user
+    const [{user},] = useStateValue();
     //hook to add a new product
     const [product, setProduct] =useState({
         title: '',
@@ -32,7 +34,7 @@ function ViewProduct(props) {
         e.preventDefault();
         ///name and value of the input field
         const {name, value} =  e.target;
-
+        //setting the property names using computed property names
         setProduct({...product, [name]: value})
     }
 
@@ -133,8 +135,11 @@ function ViewProduct(props) {
         //cleanup
         return ()=> abort.abort();
     },[id])
+
+    //state for the supplier
     const [suppliers,setSuppliers] = useState([]);
 
+    //getting all suppliers
     useEffect(()=>{
         const abort = new AbortController();
         const signal = abort.signal;
@@ -150,7 +155,7 @@ function ViewProduct(props) {
         return ()=> abort.abort();
     },[])
 
-    //ref to select 
+    //ref to select tag to get the value
     const suppRef = useRef()
 
     //adding suppliers to our products
@@ -158,7 +163,7 @@ function ViewProduct(props) {
         e.preventDefault();
          
         const supplierId =suppRef.current.value;
-        console.log(`Stringfyied Id: ${JSON.stringify(supplierId)}`);
+        
         try{
             const res = await fetch(`/suppliers/product/${id}/supplier`,{
                 method: "post",
@@ -207,12 +212,13 @@ function ViewProduct(props) {
                 </button>
                 <select name="supplier" ref={suppRef}>
                     {suppliers.map(supplier => 
-                    <option 
-                        key={supplier._id} 
-                        value={supplier._id}
-                    >
-                        {supplier.name}
-                    </option>)}
+                        <option 
+                            key={supplier._id} 
+                            value={supplier._id}
+                        >
+                            {supplier.name}
+                        </option>)
+                    }
                 </select>
             </form>
              <div className="update">
@@ -220,6 +226,7 @@ function ViewProduct(props) {
                         type="submit" 
                         className="btn-add"
                         onClick={handleSubmit}
+                        disabled={!user.admin}
                     >
                         Update Product
                     </button>
@@ -229,6 +236,7 @@ function ViewProduct(props) {
                     type="submit"  
                     className="btn-delete"
                     onClick={handleDelete}
+                    disabled={!user.admin}
                 >
                     Delete
                 </button>

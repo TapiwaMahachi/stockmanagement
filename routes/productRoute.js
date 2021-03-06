@@ -7,7 +7,7 @@ import verifyUser from './verifyToken.js';
 const router = express.Router();
 
 //get all products
-router.get('/all', verifyUser,(req, res, next)=>{
+router.get('/all',(req, res, next)=>{
      //verifying if the user is admin
    
     Product.find({}, (err, data)=>{
@@ -46,14 +46,6 @@ router.get('/product/:id',(req, res, next)=>{
 //add product to db
 router.post('/add',verifyUser,(req, res, next) =>{
 
-    //verifying if the user is admin
-    const {admin} = req.user;
-    if(!admin){
-        const err = new Error('User is not admin');
-        err.status = 403;
-        next(err)
-    }
-
     //add  product to the database
     Product.create( req.body ,(err, data)=>{
         if(err)
@@ -66,14 +58,6 @@ router.post('/add',verifyUser,(req, res, next) =>{
 //updating product
 router.put('/product/update/:id',verifyUser,  (req, res, next)=>{
 
-     //verifying if the user is admin
-    const {admin} = req.user;
-
-     if(!admin){
-        const err = new Error('User is not admin');
-        err.status = 403;
-        next(err)
-    }
     //find the product using id
     Product.updateOne({_id: req.params.id},
          //spread syntax
@@ -87,14 +71,6 @@ router.put('/product/update/:id',verifyUser,  (req, res, next)=>{
 })
 //delete product
 router.delete('/product/delete/:id', verifyUser, (req, res,next)=>{
-
-    //verifying if the user is admin
-    const {admin} = req.user;
-    if(!admin){
-        const err = new Error('User is not admin');
-        err.status = 403;
-        next(err)
-    }
 
     //delete using id
     Product.deleteOne({_id: req.params.id}, (err,data)=>{

@@ -1,3 +1,7 @@
+.user-update{
+    width: 400px;
+    border-radius: 5px;
+}
 select{
     height: 40px;
     border: 1px solid var(--clr-border);
@@ -6,7 +10,18 @@ select{
     margin-bottom: 1em;
     font-size: var(--fs-body);
     font-weight: var(--fw-reg);
+    color: var(--clr-text);
 }
 select:focus{
     border-color: var(--clr-btn);
+}
+.role{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.role > label{
+    font-size: var(--fs-body);
+    font-weight: var(--fw-bold);
+    color: var(--clr-text);
 }

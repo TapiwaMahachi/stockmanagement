@@ -33,7 +33,7 @@ function CreateUser(props) {
 
         setUser({...user, [name]: value});
     }
-
+    //function to update user details
     const handleSubmit = async e =>{
         e.preventDefault();
         //user details
@@ -92,7 +92,8 @@ function CreateUser(props) {
             err: true
         }));  
     }
-     const handleCancel=()=>{
+
+    const handleCancel=()=>{
         setSuccess({
             ...success, 
             message:'', 
@@ -101,24 +102,31 @@ function CreateUser(props) {
         })
         props.reset();
     }
-     //get the user based on id from the database
-    const fetchUser = async (id)=>{
-        if(id === undefined) return
-
-        const res = await fetch(`/users/user/${id}`);
-        if(res.ok){
-            const data = await res.json();
-            setUser(data)
-        }
-    }
+     
+    //get the user based on id from the database
     useEffect(()=>{
-       
-        fetchUser(id);
+
+        const controller = new AbortController();
+        const signal = controller.signal;
+
+        const fetchUser = async (id)=>{
+            if(id === undefined) return
+
+            const res = await fetch(`/users/user/${id}`,{signal:signal});
+            if(res.ok){
+                const data = await res.json();
+                setUser(data)
+            }
+        }
+        fetchUser()
+        .catch(console.log);
+
+        return () => controller.abort();
 
     },[id])
 
     return (
-        <div className="create">
+        <div className="create user-update">
              {ok && 
                 <div className={err ?'error':'success'}>
                     <p>{err ? message : "User SuccessFully Updated"}</p>
@@ -130,7 +138,7 @@ function CreateUser(props) {
                     handleSubmit={handleSubmit} 
                     user={user}
                 />
-                <div className="create__btns">
+                <div className="update">
                     <button 
                         type="submit" 
                         className="btn-add"
@@ -139,7 +147,7 @@ function CreateUser(props) {
                     </button>
                 </div>
             </form>
-             <div className="create__delete">
+             <div className="delete-cancel">
                 <button 
                     type="submit"  
                     className="btn-delete"
