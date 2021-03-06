@@ -15,6 +15,7 @@
     border-radius: 5px;
 }
 
+.create-btns> button,
 .update > button , .delete-cancel>button{
     cursor: pointer;
     text-transform: uppercase;
@@ -35,6 +36,7 @@
     background:rgb(179, 66, 66);
     
 }
+.create-btns>.cancel-btn,
 .delete-cancel>.cancel-btn{
     background: var(--clr-border);
     color: var(--clr-text);

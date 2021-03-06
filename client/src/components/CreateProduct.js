@@ -69,11 +69,11 @@ function CreateProduct(props) {
             }
             <form className="form" onSubmit={handleSubmit}>
                 {<ProductInputs handleChange={handleChange} product={product}/>}
-                <div className="create__btns">
+                <div className="create-btns">
                     <button type="submit" className="btn-add">Add</button>
                     <button 
                         type="reset"  
-                        className="btn-cancel"
+                        className="cancel-btn"
                         onClick={props.reset}
                     >
                         Cancel

@@ -74,11 +74,11 @@ function CreateUser(props) {
                         onChange={handleChange}
                     />
                 </div>
-                <div className="create__btns">
+                <div className="create-btns">
                     <button type="submit" className="btn-add">Add</button>
                     <button 
                     type="reset"  
-                    className="btn-cancel"
+                    className="cancel-btn"
                     onClick={props.reset}
                     >
                         Cancel
