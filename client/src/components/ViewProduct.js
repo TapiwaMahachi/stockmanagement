@@ -2,8 +2,12 @@ import React,{useEffect, useRef, useState} from 'react'
 import {useHistory, useParams } from 'react-router-dom';
 import ProductInputs from './ProductInputs';
 import {useStateValue} from '../StateProvider';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'; 
 import '../css/viewproduct.css';
 
+//configuring toast
+toast.configure();
 
 function ViewProduct(props) {
     //get the user
@@ -18,16 +22,21 @@ function ViewProduct(props) {
     //hook to display a message to the user
     const [success, setSuccess] =useState({
         err: false,
-        ok: false,
         message: ''
     })
-    const {err, ok, message} = success;
+    const {err, message} = success;
 
     //getting id from the url
     const {id} =useParams();
     
     //redirecting 
     const history= useHistory();
+
+    //notification handle
+    const notify =msg=>{
+        if(err) toast.danger(`Error  ${message}`)
+        else toast.success(`Product successfully ${msg} `)
+    }
 
     //getting user input
     const handleChange =e=>{
@@ -58,6 +67,8 @@ function ViewProduct(props) {
             if(res.ok){
                 //display success message to the user
                 setSuccess({...success, ok: true})
+            
+                 notify('updated');
                  //reset the input fields
                 setProduct({
                     title: '',
@@ -67,13 +78,15 @@ function ViewProduct(props) {
                 })
                 //go back to main page
                 history.push('/admin/')
+                
+                //close the compmonent
+                props.setView(false)
             } 
         }
         updateProduct()
         .catch(e=> setSuccess({
             ...success, 
             message: e.message, 
-            ok: true, 
             err: true
         }));
       
@@ -91,14 +104,14 @@ function ViewProduct(props) {
 
             if(res.ok){
                 history.push('/admin')
+                notify('deleted');
                 props.setView(false);   
             }
         }
         deleteProduct()
         .catch(e =>setSuccess({
             ...success, 
-            message:e.message, 
-            ok: true, 
+            message:e.message,  
             err: true
         }));  
     };
@@ -107,7 +120,6 @@ function ViewProduct(props) {
         setSuccess({
             ...success, 
             message:'', 
-            ok: false, 
             err: false
         })
         props.setView(false)
@@ -185,11 +197,6 @@ function ViewProduct(props) {
               <h1>Product Details</h1>
           </div>
          <div className="create">
-            {ok && 
-                <div className={err ?'error':'success'}>
-                    <p>{err ? message : "Product SuccessFully Updated"}</p>
-                </div>
-            }
             <form className="form" onSubmit={handleSubmit}>
                 {<ProductInputs 
                     handleChange={handleChange} 
