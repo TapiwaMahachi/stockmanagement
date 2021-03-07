@@ -1,8 +1,11 @@
 import React, { useState } from 'react'
 import '../css/create_product.css'
 import ProductInputs from './ProductInputs';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
- 
+toast.configure();
+
 function CreateProduct(props) {
 
     //hook to add a new product
@@ -14,12 +17,16 @@ function CreateProduct(props) {
     })
     //hook to display a message to the user
     const [success, setSuccess] = useState({
-        ok:false,
-        failed: false,
+        error: false,
         message: '',
     })
-    const {ok, failed, message } = success;
- 
+    const {error, message } = success;
+    
+    //notification handle
+    const notify =()=>{
+        if(error) toast.danger(`Error ${message}`)
+        else toast.success('Product sucessfully added')
+    }
     //function to add the product to the datatbase
     const handleSubmit= async e =>{
         e.preventDefault();
@@ -38,7 +45,7 @@ function CreateProduct(props) {
             
             if(res.ok){
                 //display success message to the user
-                 setSuccess({...success, ok: true})       
+                  notify();    
                 //reset the input fields
                 setProduct({
                     title: '',
@@ -46,11 +53,12 @@ function CreateProduct(props) {
                     quantity: '',
                     category: '', 
                 })
+                props.reset();
             } 
         }
         addProduct()
         .catch(e => 
-            setSuccess({...success, message: e.message,failed: true, ok:true})
+            setSuccess({...success, message: e.message,error: true})
         )  
     }
 
@@ -63,10 +71,6 @@ function CreateProduct(props) {
 
     return (
         <div className="create">
-            {ok && <div className={failed?'error':'success'}>
-                    {failed ? <p>{message}</p>:<p>Product successfully added</p>}
-                   </div>
-            }
             <form className="form" onSubmit={handleSubmit}>
                 {<ProductInputs handleChange={handleChange} product={product}/>}
                 <div className="create-btns">

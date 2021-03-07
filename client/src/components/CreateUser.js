@@ -1,4 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState} from 'react';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
 
 function CreateUser(props) {
 
@@ -9,8 +13,18 @@ function CreateUser(props) {
         password: ''
     });
     //display a success message
-    const [ok, setOk] = useState(false);
-
+     //hook to display a message to the user
+    const [success, setSuccess] = useState({
+        error: false,
+        message: '',
+    })
+    const {error, message } = success;
+     //notification handle
+    const notify =()=>{
+        if(error) toast.danger(`Error ${message}`)
+        else toast.success('User sucessfully added')
+    }
+    
     //get user input 
     const handleChange = e =>{
         e.preventDefault()
@@ -30,20 +44,25 @@ function CreateUser(props) {
         //add user to db
         try{
             const res = await fetch('/users/register', init);
-            if(res.ok) setOk(!ok)
-        }catch(e){console.log(e)}
+            if(res.ok){
+                notify();
+                 //reset the inputs
+                setUser({
+                    name: '',
+                    email: '',
+                    password: ''
+                })
+                props.reset();
+            }
+        }catch(e){
+        setSuccess({...success, message:e, error: true})
+       }
 
-        //reset the inputs
-        setUser({
-            name: '',
-            email: '',
-            password: ''
-        })
+       
     }
     return (
         <div className="create">
             <form className="form" onSubmit={handleSubmit}>
-                {ok && <div className='success'><p>User successfully created</p></div>}
                 <div className="create_inputs">
                     <input
                         className="inputs"

@@ -2,6 +2,10 @@ import React, {useEffect, useState} from 'react'
 import { useHistory, useParams } from 'react-router-dom';
 import '../css/updateuser.css';
 import UserInputs from './UserInputs';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
 
 function CreateUser(props) {
 
@@ -15,11 +19,14 @@ function CreateUser(props) {
     //display  success or error message
     const [success, setSuccess] =useState({
         err: false,
-        ok: false,
         message: ''
     })
-    const {err, ok, message} = success;
-
+    const {err, message} = success;
+    //notification handle
+    const notify=msg=>{
+        if(err) toast.danger(`Error ${message}`);
+        else toast.success(`User sucessfully ${msg}`)
+    }
     //clear the id from url
     const history= useHistory();
     //get the id from url
@@ -50,8 +57,9 @@ function CreateUser(props) {
                 throw new Error(res.statusText);
 
             if(res.ok){
-                setSuccess({...success, ok: true})
-                history.push('/admin')
+                history.push('/admin');
+                notify('updated');
+                props.reset();
                 //reset the inputs
                 setUser({
                     name: '',
@@ -65,7 +73,6 @@ function CreateUser(props) {
         .catch(e=> setSuccess({
             ...success, 
             message: e.message, 
-            ok: true, 
             err: true
         }));   
     }
@@ -81,6 +88,7 @@ function CreateUser(props) {
 
             if(res.ok){
                 history.push('/admin')
+                notify('deleted')
                 props.reset();
             }
         }
@@ -88,7 +96,6 @@ function CreateUser(props) {
         .catch(e =>setSuccess({
             ...success, 
             message:e.message, 
-            ok: true, 
             err: true
         }));  
     }
@@ -96,8 +103,7 @@ function CreateUser(props) {
     const handleCancel=()=>{
         setSuccess({
             ...success, 
-            message:'', 
-            ok: false, 
+            message:'',  
             err: false
         })
         props.reset();
@@ -126,11 +132,6 @@ function CreateUser(props) {
 
     return (
         <div className="create user-update">
-             {ok && 
-                <div className={err ?'error':'success'}>
-                    <p>{err ? message : "User SuccessFully Updated"}</p>
-                </div>
-            }
             <form className="form" onSubmit={handleSubmit}>
                 <UserInputs 
                     handleChange={handleChange} 

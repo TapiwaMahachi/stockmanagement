@@ -1,10 +1,25 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+toast.configure();
 
 function CreateSupplier(props) {
     const [supplier, setSupplier] = useState({
         name: '',
         email: '',
     })
+    //hook to display a message to the user
+    const [success, setSuccess] = useState({
+        error: false,
+        message: '',
+    })
+    const {error, message } = success;
+     //notification handle
+    const notify =()=>{
+        if(error) toast.danger(`Error ${message}`)
+        else toast.success('Supplier sucessfully added')
+    }
     const handleChange =(e)=>{
         e.preventDefault();
         const {name, value}= e.target;
@@ -24,14 +39,18 @@ function CreateSupplier(props) {
 
             }
             else{
+                notify();
                 setSupplier({
                     name: '',
                     email: '',
-                })
+                });
+                props.reset();
             }
         }
         addSupplier()
-        .catch(e => console.log('Error creating supplier', e))
+        .catch(e => setSuccess({
+            ...success, message: e, error: true
+        }))
            
     }
     return (
