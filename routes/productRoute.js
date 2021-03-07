@@ -26,7 +26,7 @@ router.get('/product/:id',(req, res, next)=>{
      .exec( (err, product)=>{
 
          //findind suppliers not in our product supplier list
-          Supplier.find({_id : {$nin : product.supplier}},(err, suppliers)=>{
+          Supplier.find({_id : {$nin : product?.supplier}},(err, suppliers)=>{
        
           if(err){
            return next(err) 

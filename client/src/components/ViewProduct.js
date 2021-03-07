@@ -200,8 +200,15 @@ function ViewProduct(props) {
                
             </form> 
             <div className="supplier-view">
-                <label>Supplier</label>
-                {product.supplier?.map(sup =><p key={sup?._id}>{sup?.name}</p>)}
+                <label>
+                    {`Supplier${product.supplier?.length > 1 ? 's': ''}`}
+                </label>
+                <ul>
+                    {
+                     product.supplier?.map( sup =><li key={sup?._id}>{sup?.name}</li>)
+                    }
+                </ul>
+               
             </div>
             <form className="add-supplier" onSubmit={addSupplier}>
                 <button 
@@ -211,7 +218,8 @@ function ViewProduct(props) {
                     Add Supplier
                 </button>
                 <select name="supplier" ref={suppRef}>
-                    {suppliers.map(supplier => 
+                    {
+                        suppliers.map(supplier => 
                         <option 
                             key={supplier._id} 
                             value={supplier._id}
@@ -226,7 +234,7 @@ function ViewProduct(props) {
                         type="submit" 
                         className="btn-add"
                         onClick={handleSubmit}
-                        disabled={!user.admin}
+                        disabled={!user?.admin}
                     >
                         Update Product
                     </button>
@@ -236,7 +244,7 @@ function ViewProduct(props) {
                     type="submit"  
                     className="btn-delete"
                     onClick={handleDelete}
-                    disabled={!user.admin}
+                    disabled={!user?.admin}
                 >
                     Delete
                 </button>
