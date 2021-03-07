@@ -111,12 +111,10 @@ function CreateUser(props) {
 
         const fetchUser = async()=>{
             if(id === undefined) return
-             console.log('user in effect')
             const res = await fetch(`/users/user/${id}`,{signal:signal});
             if(res.ok){
                 const data = await res.json();
                 setUser(data)
-                console.log('user',data)
             }
         }
         fetchUser()
