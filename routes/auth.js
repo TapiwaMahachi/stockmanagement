@@ -44,7 +44,7 @@ router.post('/register',verifyUser, async (req, res)=>{
 //router.post('/user/login', login_user);
 
 
-router.post('/user/login',  async (req, res,next)=>{
+router.post('/login',  async (req, res,next)=>{
 
     //validate the user details 
     const {error} = loginValidation(req.body);
