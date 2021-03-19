@@ -102,6 +102,16 @@ const Login = () => {
                 <button type="submit"  className="signin">Sign In</button>
             </form> 
         </div>
+        <div style={{
+            width: '150px',
+            border: '1px solid blue',
+            height:'fit-content',
+            padding: '.5rem',
+            }}>
+            <p>{`username : admin\n
+                password: root1234\n
+                email: admin@gmail.com`}</p>
+        </div>
        </section>
     )
 }

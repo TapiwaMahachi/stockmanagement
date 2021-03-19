@@ -61,7 +61,7 @@ db.once('open', ()=>{
 })
 
 //Router middleware
-app.use('/users', userRoutes);
+app.use('/users', authRoute);
 
 app.use('/products', prodRoute);
 
