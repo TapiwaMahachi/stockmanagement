@@ -11,6 +11,7 @@ import path from 'path';
 import {authRoute} from './routes/auth.js';
 import { prodRoute } from "./routes/productRoute.js";
 import { supplierRoutes } from "./routes/supplierRoutes.js";
+import {userRoutes} from './routes/users.js';
 
 //config the env
 dotenv.config(); 
@@ -60,7 +61,7 @@ db.once('open', ()=>{
 })
 
 //Router middleware
-app.use('/users', authRoute);
+app.use('/users', userRoutes);
 
 app.use('/products', prodRoute);
 

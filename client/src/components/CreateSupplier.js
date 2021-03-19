@@ -65,6 +65,7 @@ function CreateSupplier(props) {
                     required 
                     onChange={handleChange}
                     placeholder="name"
+                    autoFocus
                 />
                 <input 
                     className="inputs"

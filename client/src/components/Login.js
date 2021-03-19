@@ -43,7 +43,7 @@ const Login = () => {
 
         const loginUser = async()=>{
 
-            const res = await fetch('/users/user/login', initUser);
+            const res = await fetch('/users/login', initUser);
 
             if(res.status=== 400)
                 throw new Error('Invalid Credentials');

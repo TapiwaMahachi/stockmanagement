@@ -4,7 +4,7 @@ import {userRegistrationValidation, loginValidation}  from '../validation.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import verifyUser from './verifyToken.js';
-import { login_user } from '../controller/userController.js';
+
 
 const router = express.Router();
 
