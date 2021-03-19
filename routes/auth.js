@@ -59,8 +59,10 @@ router.post('/login',  async (req, res,next)=>{
     //check if password is correct - if not return 
     //--using bcrypt to compare the password entered against the hashed password stored in the db
     const validPassword =  bcrypt.compareSync(req.body.password, user.password);
+    console.log(`${validPassword}, ${user.password}, ${req.body.password}`)
+    
     if(!validPassword) 
-        return res.status(400).send('Invalid Password');
+        return res.status(400).json("Invalid Password");
     
     //creating and signing a token  with JWT 
     const token = jwt.sign(

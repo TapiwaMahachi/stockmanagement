@@ -29,21 +29,21 @@ userSchema.set('toJSON', {
 });
 
 //check if the password has been modifiied
-userSchema.pre('save', function(next){
+// userSchema.pre('save', function(next){
 
-    if(!this.isModified('password')) return next();
-    //password has changed - salt and hash it
-    bcrypt.hash(this.password, SALT_ROUNDS, (err, hash)=>{
-        if(err) return next(err);
-        this.password= hash;
-        next();
-    });
-});
+//     if(!this.isModified('password')) return next();
+//     //password has changed - salt and hash it
+//     bcrypt.hash(this.password, SALT_ROUNDS, (err, hash)=>{
+//         if(err) return next(err);
+//         this.password= hash;
+//         next();
+//     });
+// });
 
-//comparing password
-userSchema.methods.comparePassword =function(tryPassword, cb){
-    bcrypt.compare(tryPassword, this.password, cb);
-};
+// //comparing password
+// userSchema.methods.comparePassword =function(tryPassword, cb){
+//     bcrypt.compare(tryPassword, this.password, cb);
+// };
 
 //used when redirecting from the backend
 userSchema
