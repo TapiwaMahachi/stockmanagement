@@ -5,13 +5,13 @@ A basic stock management web application
 
 This is a small admin page that the owner can use to add new item and add users. 
 To update and delete items or users you click on the item or user you want to update or delete.
-You can filter inventory based on category or  view items running low in stock.
+You can filter inventory based on category, supplier and view items running low in stock.
 
 ### url
 Demo of the application -> [stockmanagement app](https://pure-basin-41999.herokuapp.com/)
 
 
-To start login as admin
+To start using the application login as admin with the details below
 
 ``` diff
 name: admin
@@ -20,7 +20,7 @@ password: root1234
 ```
 
 
-### starting the server 
+### starting the server when you clone the app
 
 install dependencies and  run the server
 
@@ -45,9 +45,9 @@ You can run concurrently both the server and the frontend   use the following in
  ```
 ### Libraries and frameworks
 
-- Express - a Node web framework for creating a custom server.
-Allows to write handlers for requests with different HTTP verbs at different URL paths (routes).
-Allows  to set settings like the port to use for connecting, additional request processing "middleware"
+- Express.js - a Node web framework for creating a custom server.
+allows to write handlers for requests with different HTTP verbs at different URL paths (routes).
+allows  to set settings like the port to use for connecting, additional request processing "middleware"
 and paths for our postbuild when in production. 
 
 - MongoDb Atlas cloud based  NoSQL database.
@@ -55,11 +55,11 @@ and paths for our postbuild when in production.
 - Mongoose a object modeling tool built on top of the MongoDb driver.Allows us to perform all the database
 operaions, that is creating, reading, updating and deleting data from our database and to define the schema of our database. 
 
-- bycrpt for hashing the passwords, this ensures our passwords are secure.
-When user login  we compare the loggin password details against our hashed password stored in the database.
-
 - JSON Web Token (JWT) to define a compact and self-contained way for securely transmitting information between parties as a JSON object. The information is digitally signed  hence secure and the information is 
 signed into the access-token that contains the logged in user information that will be accessed via cookies.
+
+- bycrpt for hashing the passwords, this ensures our passwords are secure.
+When user login  we compare the loggin password details against our hashed password stored in the database.
 
 - cookie-parser - parse Cookie header and populate req.cookies with an object keyed by the cookie names - our JWT token
 
