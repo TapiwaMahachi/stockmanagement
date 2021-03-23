@@ -19,8 +19,8 @@ password: root1234
 
  - ES2017 latest features like Async/Await
  - CORS enabled 
- - Uses [Express.js](https://expressjs.com/) - a Node web framework for creating a custom server. 
--Uses  NoSQL database [MongoDb](https://www.mongodb.com/) Atlas cloud based  NoSQL database.
+ - Custom server with [Express.js](https://expressjs.com/) - a Node web framework for creating a custom server. 
+ - NoSQL database [MongoDb](https://www.mongodb.com/) Atlas cloud based  NoSQL database.
  - Uses [Mongoose](https://mongoosejs.com/docs/) a object modeling tool built on top of the MongoDb driver.Allows us to perform CRUD functionlity on our database and to define the schema. 
  - Implemented mordern authentication wth [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) (JWT) to define a compact and self-contained way for securely transmitting information between parties as a JSON object.
  - Hash password with [bycrpt](https://www.npmjs.com/package/bcryptjs) 
