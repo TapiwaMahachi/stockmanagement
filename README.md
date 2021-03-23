@@ -20,18 +20,18 @@ password: root1234
  - ES2017 latest features like Async/Await
  - CORS enabled 
  - Custom server with [Express.js](https://expressjs.com/) - a Node web framework for creating a custom server. 
- - NoSQL database [MongoDb](https://www.mongodb.com/) Atlas cloud based  NoSQL database.
- - Uses [Mongoose](https://mongoosejs.com/docs/) a object modeling tool built on top of the MongoDb driver.Allows us to perform CRUD functionlity on our database and to define the schema. 
+ - NoSQL database [MongoDb](https://www.mongodb.com/) atlas cloud 
+ - Uses [Mongoose](https://mongoosejs.com/docs/) an Object Data Modeling tool built on top of the MongoDb driver.
  - Implemented mordern authentication wth [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) (JWT) to define a compact and self-contained way for securely transmitting information between parties as a JSON object.
- - Hash password with [bycrpt](https://www.npmjs.com/package/bcryptjs) 
+ - Uses [bycrpt](https://www.npmjs.com/package/bcryptjs) to hash paswords
  - Uses [helmet](https://github.com/helmetjs/helmet) to set some HTTP headers for security
  - Load environment variables from .env files with [dotenv](https://github.com/motdotla/dotenv)
  - Request validation with [joi](https://github.com/hapijs/joi)
  - Gzip compression with [compression](https://github.com/expressjs/compression)
  - Update data in realtime with [Pusher](https://pusher.com/) 
  - Implemented client-side routing with [React-Router](https://reactrouter.com/web/guides/quick-start) to maintain the seamless UX that a typical single page application promises
- - Handle statemanagement with [React](https://reactjs.org/) hooks with an emphasis on clean, comprehensive and declarative codebase.
- - Material based UI with [Material-ui](https://material-ui.com/)
+ - Handle state management with [React](https://reactjs.org/) hooks with an emphasis on clean, comprehensive and declarative codebase.
+ - Material based UI  with [Material-ui](https://material-ui.com/)
  - Utilized [Recharts](https://recharts.org/en-US/api) for a rich UX to display data.
  - API documentation generation with [apidoc](http://apidocjs.com)
 
