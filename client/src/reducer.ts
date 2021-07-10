@@ -4,7 +4,7 @@ export const initialState = {
     user: null
 }
 
-function reducer(state, action){
+function reducer(state: any, action: { type: string; user: any; }){
 
     if(action.type === "USER")
         return { ...state, user: action.user}

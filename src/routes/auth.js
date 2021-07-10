@@ -1,6 +1,6 @@
 import express from 'express';
-import User from '../models/user.js';
-import {userRegistrationValidation, loginValidation}  from '../validation.js'
+import User from '../../../models/user.js';
+import {userRegistrationValidation, loginValidation}  from '../../../validation.js'
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import verifyUser from './verifyToken.js';

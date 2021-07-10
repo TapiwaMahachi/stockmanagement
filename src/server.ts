@@ -31,7 +31,7 @@ app.use(cookieParser());
 app.use(cors());
 
 //db config
-mongoose.connect(process.env.DB_CONNECT,{
+mongoose.connect(process.env.DB_CONNECT!,{
     useCreateIndex: true,
     useNewUrlParser:true,
     useUnifiedTopology: true
@@ -82,7 +82,11 @@ app.use(function(req, res, next) {
 });
 
 //error handler
-app.use(function(err, req, res, next) {
+app.use( function (
+    err: { status: any; message: any; },
+    req: any, res: { status: ( arg0: any ) => void; send: ( arg0: string ) => void; },
+    next: any )
+{
   // show error  msg
   res.status(err.status || 500);
   res.send(`error ${err.message}`);

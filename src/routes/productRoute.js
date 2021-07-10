@@ -1,6 +1,6 @@
 import express from 'express';
-import Product from '../models/product.js';
-import Supplier from '../models/supplier.js'
+import Product from '../../../models/product.js';
+import Supplier from '../../../models/supplier.js'
 import verifyUser from './verifyToken.js';
 
 
